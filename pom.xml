@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.zjl</groupId>
+  <artifactId>seckill</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>seckill</name>
+  <url>http://maven.apache.org</url>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.5.RELEASE</version>
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.41</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mybatis.generator</groupId>
+      <artifactId>mybatis-generator-core</artifactId>
+      <version>1.4.0</version>
+      <type>pom</type>
+    </dependency>
+  </dependencies>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.mybatis.generator</groupId>
+          <artifactId>mybatis-generator-maven-plugin</artifactId>
+          <version>1.3.5</version>
+          <dependencies>
+            <!--如果提示找不到该jar,则将其放入dependencies 内 -->
+<!--            <dependency>-->
+<!--              <groupId>org.mybatis.generator</groupId>-->
+<!--              <artifactId>mybatis-generator-core</artifactId>-->
+<!--              <version>1.4.0</version>-->
+<!--              <type>pom</type>-->
+<!--            </dependency>-->
+            <!--解析为 mysql-->
+            <dependency>
+              <groupId>mysql</groupId>
+              <artifactId>mysql-connector-java</artifactId>
+              <version>5.1.41</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <id>mybatis generator</id><!--随便自定义-->
+              <phase>package</phase><!--在 package阶段-->
+              <goals><goal>generate</goal></goals><!--目标-->
+            </execution>
+          </executions>
+          <configuration>
+            <!--实际工作中会反复生成-->
+            <!--允许移动生成的文件-->
+            <verbose>true</verbose><!--默认false-->
+            <!--允许自动覆盖文件--><!--一般不能设置true,会覆盖其他人的xml，以增量方式，首次生成，后续只修改-->
+            <overwrite>true</overwrite>
+            <!--重要： mybatis-generator 配置文件的路径-->
+            <configurationFile>src/main/resources/mybatis-generator.xml</configurationFile>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
