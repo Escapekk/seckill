@@ -8,6 +8,8 @@ import com.zjl.error.BusinessException;
 import com.zjl.error.EmBusinessError;
 import com.zjl.service.UserService;
 import com.zjl.service.model.UserMoldel;
+import com.zjl.validator.ValidationResult;
+import com.zjl.validator.ValidatorImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserPasswordDOMapper userPasswordDOMapper;
+
+    @Autowired
+    private ValidatorImpl validator;
 
 
     @Override
@@ -41,12 +46,17 @@ public class UserServiceImpl implements UserService {
         if(userMoldel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        if(StringUtils.isEmpty(userMoldel.getName())
-        ||userMoldel.getGender() == null
-        ||userMoldel.getAge() == null
-        ||StringUtils.isEmpty(userMoldel.getTelphone())) {
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+//        if(StringUtils.isEmpty(userMoldel.getName())
+//        ||userMoldel.getGender() == null
+//        ||userMoldel.getAge() == null
+//        ||StringUtils.isEmpty(userMoldel.getTelphone())) {
+//            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+//        }
+        ValidationResult validationResult = validator.validate(userMoldel);
+        if(validationResult.getHasErrors()) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, validationResult.getErrMsg());
         }
+
         UserDO userDO = convertFromModel(userMoldel);
         try {
             userDOMapper.insertSelective(userDO);
