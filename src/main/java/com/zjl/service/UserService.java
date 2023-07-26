@@ -5,9 +5,9 @@ import com.zjl.service.model.UserMoldel;
 
 public interface UserService {
 
-    public UserMoldel getUserById(Integer id);
+    UserMoldel getUserById(Integer id);
 
-    public void register(UserMoldel userMoldel) throws BusinessException;
+    void register(UserMoldel userMoldel) throws BusinessException;
 
-    public UserMoldel ValidateLogin(String telphone, String encrptPassword) throws BusinessException;
+    UserMoldel ValidateLogin(String telphone, String encrptPassword) throws BusinessException;
 }

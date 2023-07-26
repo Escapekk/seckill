@@ -10,7 +10,7 @@ import java.util.Map;
  * @date 2023/7/26 21:08
  */
 public class ValidationResult {
-    private Boolean hasErrors;
+    private Boolean hasErrors = false;
 
     private Map<String, String> errMsgMap = new HashMap<>();
 

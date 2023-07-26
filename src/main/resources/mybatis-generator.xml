@@ -30,16 +30,24 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table schema="seckill" tableName="user_info" domainObjectName="UserDO" enableCountByExample="false"
-        enableUpdateByExample="false" enableDeleteByExample="false"
-        enableSelectByExample="false" selectByExampleQueryId="false">
-<!--            <property name="useActualColumnNames" value="true"/>-->
-<!--            <generatedKey column="ID" sqlStatement="DB2" identity="true" />-->
-<!--            <columnOverride column="DATE_FIELD" property="startDate" />-->
-<!--            <ignoreColumn column="FRED" />-->
-<!--            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
-        </table>
-        <table schema="seckill" tableName="user_password" domainObjectName="UserPasswordDO" enableCountByExample="false"
+<!--        <table schema="seckill" tableName="user_info" domainObjectName="UserDO" enableCountByExample="false"-->
+<!--        enableUpdateByExample="false" enableDeleteByExample="false"-->
+<!--        enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--&lt;!&ndash;            <property name="useActualColumnNames" value="true"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            <generatedKey column="ID" sqlStatement="DB2" identity="true" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <columnOverride column="DATE_FIELD" property="startDate" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <ignoreColumn column="FRED" />&ndash;&gt;-->
+<!--&lt;!&ndash;            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />&ndash;&gt;-->
+<!--        </table>-->
+<!--        <table schema="seckill" tableName="user_password" domainObjectName="UserPasswordDO" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+
+        <table schema="seckill" tableName="item" domainObjectName="ItemDO" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
+        <table schema="seckill" tableName="item_stock" domainObjectName="ItemStockDO" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
