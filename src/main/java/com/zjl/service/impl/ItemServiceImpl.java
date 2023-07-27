@@ -75,6 +75,19 @@ public class ItemServiceImpl implements ItemService {
         return convertFromItemDOItemStockDO(itemDO, itemStockDO);
     }
 
+    @Transactional
+    @Override
+    public boolean decreaseStock(Integer itemId, Integer amount) {
+        int row = itemStockDOMapper.decreaseStock(itemId, amount);
+        return row > 0;
+    }
+
+    @Transactional
+    @Override
+    public void increaseSales(Integer id, Integer amount) {
+        itemDOMapper.increaseSales(id, amount);
+    }
+
     private ItemDO convertItemDOFromItemModel(ItemModel itemModel) {
         ItemDO itemDO = new ItemDO();
         BeanUtils.copyProperties(itemModel, itemDO);

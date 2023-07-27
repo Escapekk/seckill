@@ -148,4 +148,11 @@
       img_url = #{imgUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="increaseSales" parameterType="com.zjl.dataobject.ItemDO">
+    update item
+    set
+    sales = sales + #{amount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
