@@ -8,5 +8,5 @@ import com.zjl.service.model.OrderModel;
  * @date 2023/7/28 0:10
  */
 public interface OrderService {
-    OrderModel create(Integer userId, Integer itemId, Integer amount) throws BusinessException;
+    OrderModel create(Integer userId, Integer itemId, Integer promoId, Integer amount) throws BusinessException;
 }

@@ -1,10 +1,12 @@
 package com.zjl.controller;
 
 import com.zjl.controller.viewobject.ItemVO;
+import com.zjl.enums.PromoStatusEnum;
 import com.zjl.error.BusinessException;
 import com.zjl.response.CommonReturnType;
 import com.zjl.service.ItemService;
 import com.zjl.service.model.ItemModel;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +59,15 @@ public class ItemController extends BaseController {
         }
         ItemVO itemVO = new ItemVO();
         BeanUtils.copyProperties(itemModel, itemVO);
+        if(itemModel.getPromoModel() != null) {
+            //有正在进行或即将进行的秒杀活动
+            itemVO.setPromoStatus(itemModel.getPromoModel().getStatus());
+            itemVO.setPromoId(itemModel.getPromoModel().getId());
+            itemVO.setPromoPrice(itemModel.getPromoModel().getPromoItemPrice());
+            itemVO.setStartDate(itemModel.getPromoModel().getStartDate().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
+        }else {
+            itemVO.setPromoStatus(PromoStatusEnum.NOPROMO.getCode());
+        }
         return itemVO;
     }
 }

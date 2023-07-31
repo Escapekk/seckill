@@ -4,10 +4,13 @@ import com.zjl.dao.ItemDOMapper;
 import com.zjl.dao.ItemStockDOMapper;
 import com.zjl.dataobject.ItemDO;
 import com.zjl.dataobject.ItemStockDO;
+import com.zjl.enums.PromoStatusEnum;
 import com.zjl.error.BusinessException;
 import com.zjl.error.EmBusinessError;
 import com.zjl.service.ItemService;
+import com.zjl.service.PromoService;
 import com.zjl.service.model.ItemModel;
+import com.zjl.service.model.PromoModel;
 import com.zjl.validator.ValidationResult;
 import com.zjl.validator.ValidatorImpl;
 import org.springframework.beans.BeanUtils;
@@ -36,6 +39,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ValidatorImpl validator;
+
+    @Autowired
+    private PromoService promoService;
 
     @Override
     @Transactional
@@ -72,7 +78,15 @@ public class ItemServiceImpl implements ItemService {
             return null;
         }
         ItemStockDO itemStockDO = itemStockDOMapper.selectByItemId(itemDO.getId());
-        return convertFromItemDOItemStockDO(itemDO, itemStockDO);
+        ItemModel itemModel = convertFromItemDOItemStockDO(itemDO, itemStockDO);
+
+        //获取活动商品信息
+        PromoModel promoModel = promoService.gerPromoByItemId(itemModel.getId());
+        if(promoModel != null && promoModel.getStatus() != PromoStatusEnum.NOPROMO.getCode()) {
+            itemModel.setPromoModel(promoModel);
+        }
+
+        return itemModel;
     }
 
     @Transactional
